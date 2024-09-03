@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package chat;
+
+service ChatService {
+    // 用户发送消息
+    rpc SendMessage(ChatMessage) returns (ChatReply);
+    // 流式接收消息
+    rpc ReceiveMessages(User) returns (stream ChatMessage);
+}
+
+message User {
+    string username = 1;
+}
+
+message ChatMessage {
+    string username = 1;
+    string message = 2;
+}
+
+message ChatReply {
+    string status = 1;
+}
+//  做一个集群

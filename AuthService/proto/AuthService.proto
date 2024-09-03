@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+    rpc Register(RegisterRequest) returns (AuthResponse);
+    rpc Login(LoginRequest) returns (AuthResponse);
+    rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+    rpc Logout(LogoutRequest) returns (LogoutResponse);
+}
+
+message RegisterRequest {
+    bytes username = 1;
+    bytes password = 2;
+}
+
+message LoginRequest {
+    bytes username = 1;
+    bytes password = 2;
+}
+
+message ValidateTokenRequest {
+    bytes token = 1;
+}
+
+message LogoutRequest {
+    bytes token = 1;
+}
+
+message AuthResponse {
+    bytes token = 1;
+    bytes message = 2;
+}
+
+message ValidateTokenResponse {
+    bool is_valid = 1;
+    bytes username = 2;
+    bytes message = 3;
+}
+
+message LogoutResponse {
+    bytes message = 1;
+}
